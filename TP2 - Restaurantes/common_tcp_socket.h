@@ -27,8 +27,8 @@ public:
     virtual ~TCPSocket();
     TCPSocket();
     
+    // Sockets funstions.
     void bindSocket(string const &address, int port);
-    void listenConnections(int backlog); // @TODO: Gastón - Esto es solo para el server.
 };
 
 #endif /* defined(__TP2___Restaurantes__common_socket__) */

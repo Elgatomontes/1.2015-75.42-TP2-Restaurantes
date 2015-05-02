@@ -19,6 +19,7 @@ using namespace std;
 #define SOCKET_ERROR -1
 
 TCPSocket::~TCPSocket() {
+    this->socketFd = 0;
 }
 
 TCPSocket::TCPSocket() {
@@ -45,14 +46,6 @@ void TCPSocket::bindSocket(string const &address, int port) {
     if (result == SOCKET_ERROR) {
         perror("Socket bind error");
         printf("Socket bind error:%sn\n", strerror(errno));
-        exit(1);
-    }
-}
-
-void TCPSocket::listenConnections(int backlog) {
-    if (listen(socketFd, backlog)) {
-        perror("Socket listen error");
-        printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);
     }
 }
