@@ -48,3 +48,11 @@ void TCPSocket::bindSocket(string const &address, int port) {
         exit(1);
     }
 }
+
+void TCPSocket::listenConnections(int backlog) {
+    if (listen(socketFd, backlog)) {
+        perror("Socket listen error");
+        printf("Socket listen error:%sn\n", strerror(errno));
+        exit(1);
+    }
+}
