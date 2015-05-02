@@ -18,7 +18,9 @@ class TCPSocket {
 private:
     int socketFd;
     
+protected:
     virtual struct sockaddr_in socketAddr(string const &address, int port);
+    
     
 public:
     // Constructors and destructors.
