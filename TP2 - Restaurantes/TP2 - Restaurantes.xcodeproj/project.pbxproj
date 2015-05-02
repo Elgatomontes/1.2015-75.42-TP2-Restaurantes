@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8777B5691AF48EF5008E8481 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8777B5681AF48EF5008E8481 /* main.cpp */; };
+		8777B5731AF54D55008E8481 /* server_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8777B5721AF54D55008E8481 /* server_main.cpp */; };
+		8777B5751AF54D71008E8481 /* client_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8777B5741AF54D71008E8481 /* client_main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,8 @@
 
 /* Begin PBXFileReference section */
 		8777B5651AF48EF5008E8481 /* TP2 - Restaurantes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "TP2 - Restaurantes"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8777B5681AF48EF5008E8481 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8777B5721AF54D55008E8481 /* server_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server_main.cpp; sourceTree = "<group>"; };
+		8777B5741AF54D71008E8481 /* client_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = client_main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +59,34 @@
 		8777B5671AF48EF5008E8481 /* TP2 - Restaurantes */ = {
 			isa = PBXGroup;
 			children = (
-				8777B5681AF48EF5008E8481 /* main.cpp */,
+				8777B5711AF54C6C008E8481 /* Common */,
+				8777B5701AF54C66008E8481 /* Client */,
+				8777B56F1AF54C5F008E8481 /* Server */,
 			);
 			path = "TP2 - Restaurantes";
+			sourceTree = "<group>";
+		};
+		8777B56F1AF54C5F008E8481 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				8777B5721AF54D55008E8481 /* server_main.cpp */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		8777B5701AF54C66008E8481 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				8777B5741AF54D71008E8481 /* client_main.cpp */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		8777B5711AF54C6C008E8481 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8777B5691AF48EF5008E8481 /* main.cpp in Sources */,
+				8777B5751AF54D71008E8481 /* client_main.cpp in Sources */,
+				8777B5731AF54D55008E8481 /* server_main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
