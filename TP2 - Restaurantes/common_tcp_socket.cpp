@@ -7,6 +7,8 @@
 //
 
 #include <sys/socket.h>
+#include <netinet/in.h>
+#include <sys/types.h>
 #include <stdlib.h>
 #include <errno.h>
 
@@ -17,16 +19,24 @@ using namespace std;
 #define SOCKET_ERROR -1
 
 TCPSocket::~TCPSocket() {
-    this->socketAddress = nullptr;
-    this->portNumber    = 0;
 }
 
-TCPSocket::TCPSocket(string const &address, int portNumber) {
-    this->socketAddress = address;
-    this->portNumber    = portNumber;
-    
+TCPSocket::TCPSocket() {
     if ((socketFd = socket(AF_INET,SOCK_STREAM,0)) == SOCKET_ERROR) {
-        perror("Socket creatino error\n");
+        perror("Socket creation error");
+        printf("Socket creation error:%sn\n", strerror(errno));
         exit(1);
     }
+}
+
+void TCPSocket::initSocketAddr(string const &address, int portNumber) {
+    struct sockaddr_in newAddr;
+    newAddr.sin_family = AF_INET;
+    newAddr.sin_port = htons(portNumber);
+    newAddr.sin_addr.s_addr = INADDR_ANY;
+    memset(&(newAddr.sin_zero), '\0', 8);
+}
+
+void TCPSocket::bindSocket(string const &address, int portNumber) {
+    this->initSocketAddr(address, portNumber);
 }

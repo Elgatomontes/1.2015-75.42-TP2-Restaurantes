@@ -16,14 +16,16 @@ using namespace std;
 
 class TCPSocket {
 private:
-    string socketAddress;
-    int portNumber;
     int socketFd;
+    
+    void initSocketAddr(string const &address, int portNumber);
     
 public:
     // Constructors and destructors.
     virtual ~TCPSocket();
-    TCPSocket(string const &address, int portNumber);
+    TCPSocket();
+    
+    void bindSocket(string const &address, int portNumber);
 };
 
 #endif /* defined(__TP2___Restaurantes__common_socket__) */
