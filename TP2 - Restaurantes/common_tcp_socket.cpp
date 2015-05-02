@@ -29,14 +29,22 @@ TCPSocket::TCPSocket() {
     }
 }
 
-void TCPSocket::initSocketAddr(string const &address, int portNumber) {
+struct sockaddr_in TCPSocket::socketAddr(string const &address, int port) {
+    // @TODO: Gastón - Esto sirve solo para server.
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
-    newAddr.sin_port = htons(portNumber);
+    newAddr.sin_port = htons(port);
     newAddr.sin_addr.s_addr = INADDR_ANY;
-    memset(&(newAddr.sin_zero), '\0', 8);
+    memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
+    return newAddr;
 }
 
-void TCPSocket::bindSocket(string const &address, int portNumber) {
-    this->initSocketAddr(address, portNumber);
+void TCPSocket::bindSocket(string const &address, int port) {
+    struct sockaddr_in addr_in = socketAddr(address, port);
+    int result = bind(socketFd, (struct sockaddr *)&addr_in, sizeof(addr_in));
+    if (result == SOCKET_ERROR) {
+        perror("Socket bind error");
+        printf("Socket bind error:%sn\n", strerror(errno));
+        exit(1);
+    }
 }

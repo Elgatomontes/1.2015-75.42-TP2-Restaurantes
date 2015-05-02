@@ -18,14 +18,14 @@ class TCPSocket {
 private:
     int socketFd;
     
-    void initSocketAddr(string const &address, int portNumber);
+    virtual struct sockaddr_in socketAddr(string const &address, int port);
     
 public:
     // Constructors and destructors.
     virtual ~TCPSocket();
     TCPSocket();
     
-    void bindSocket(string const &address, int portNumber);
+    void bindSocket(string const &address, int port);
 };
 
 #endif /* defined(__TP2___Restaurantes__common_socket__) */
