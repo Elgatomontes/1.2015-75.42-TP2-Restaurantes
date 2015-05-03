@@ -36,6 +36,7 @@ void ServerSocket::listenConnections(int backlog) {
 }
 
 int ServerSocket::acceptConnection() {
+    // @TODO: Gastón - Ver esto porque tendría que devolver un client_socket.
     socklen_t socketLength = sizeof(struct sockaddr_in);
     int socketFd = getSocketFileDescriptor();
     struct sockaddr *addr = (struct sockaddr *)&connectionAddr;
