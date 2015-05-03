@@ -24,7 +24,7 @@ void ServerSocket::listenConnections(int backlog) {
     }
 }
 
-struct sockaddr_in TCPSocket::socketAddr(string const &address, int port) {
+struct sockaddr_in socketAddr(string const &address, int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

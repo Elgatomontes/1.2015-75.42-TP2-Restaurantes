@@ -14,8 +14,9 @@
 #include "common_tcp_socket.h"
 
 class ClientSocket : public TCPSocket {
-private:
-
+protected:
+    struct sockaddr_in socketAddr(string const &address, int port);
+    
 public:
     // Constructors and destructors.
     virtual ~ClientSocket();
