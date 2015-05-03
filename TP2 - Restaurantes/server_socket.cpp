@@ -6,12 +6,29 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <errno.h>
+
 #include "server_socket.h"
 
-void TCPSocket::listenConnections(int backlog) {
-    if (listen(socketFd, backlog)) {
+ServerSocket::~ServerSocket() {
+}
+
+void ServerSocket::listenConnections(int backlog) {
+    if (listen(getSocketFileDescriptor(), backlog)) {
         perror("Socket listen error");
         printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);
     }
+}
+
+struct sockaddr_in TCPSocket::socketAddr(string const &address, int port) {
+    struct sockaddr_in newAddr;
+    newAddr.sin_family = AF_INET;
+    newAddr.sin_port = htons(port);
+    newAddr.sin_addr.s_addr = INADDR_ANY;
+    memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
+    return newAddr;
 }

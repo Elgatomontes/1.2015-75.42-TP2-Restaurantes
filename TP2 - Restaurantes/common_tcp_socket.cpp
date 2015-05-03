@@ -18,6 +18,10 @@ using namespace std;
 
 #define SOCKET_ERROR -1
 
+int TCPSocket::getSocketFileDescriptor() {
+    return socketFd;
+}
+
 TCPSocket::~TCPSocket() {
     this->socketFd = 0;
 }
@@ -31,7 +35,6 @@ TCPSocket::TCPSocket() {
 }
 
 struct sockaddr_in TCPSocket::socketAddr(string const &address, int port) {
-    // @TODO: Gastón - Esto sirve solo para server.
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

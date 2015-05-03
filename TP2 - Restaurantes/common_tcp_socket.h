@@ -20,6 +20,7 @@ private:
     
 protected:
     virtual struct sockaddr_in socketAddr(string const &address, int port);
+    int getSocketFileDescriptor();
     
     
 public:
