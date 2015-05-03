@@ -14,6 +14,10 @@
 #include "common_tcp_socket.h"
 
 class ServerSocket : public TCPSocket {
+private:
+    int clientFd;
+    struct sockaddr_in connectionAddr;
+    
 protected:
     struct sockaddr_in socketAddr(string const &address, int port);
 
@@ -25,6 +29,7 @@ public:
     // Sockets funstions.
     void bindSocket(string const &address, int port);
     void listenConnections(int backlog);
+    int acceptConnection();
 };
 
 #endif /* defined(__TP2___Restaurantes__server_socket__) */
