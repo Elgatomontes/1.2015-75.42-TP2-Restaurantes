@@ -15,7 +15,7 @@
 
 class ClientSocket : public TCPSocket {
 private:
-    struct sockaddr_in socketAddr(string const &address, int port);
+
 public:
     // Constructors and destructors.
     virtual ~ClientSocket();
