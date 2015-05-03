@@ -14,6 +14,8 @@
 
 using namespace std;
 
+#define SOCKET_ERROR -1
+
 class TCPSocket {
 private:
     int socketFd;
@@ -27,9 +29,6 @@ public:
     // Constructors and destructors.
     virtual ~TCPSocket();
     TCPSocket();
-    
-    // Sockets funstions.
-    void bindSocket(string const &address, int port);
 };
 
 #endif /* defined(__TP2___Restaurantes__common_socket__) */

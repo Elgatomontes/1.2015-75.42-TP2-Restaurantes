@@ -22,6 +22,8 @@ public:
     virtual ~ServerSocket();
     ServerSocket() : TCPSocket() {};
     
+    // Sockets funstions.
+    void bindSocket(string const &address, int port);
     void listenConnections(int backlog);
 };
 

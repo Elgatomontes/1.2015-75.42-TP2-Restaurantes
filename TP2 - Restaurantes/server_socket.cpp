@@ -16,6 +16,16 @@
 ServerSocket::~ServerSocket() {
 }
 
+void ServerSocket::bindSocket(string const &address, int port) {
+    struct sockaddr_in addr_in = socketAddr(address, port);
+    int result = bind(getSocketFileDescriptor(), (struct sockaddr *)&addr_in, sizeof(addr_in));
+    if (result == SOCKET_ERROR) {
+        perror("Socket bind error");
+        printf("Socket bind error:%sn\n", strerror(errno));
+        exit(1);
+    }
+}
+
 void ServerSocket::listenConnections(int backlog) {
     if (listen(getSocketFileDescriptor(), backlog)) {
         perror("Socket listen error");

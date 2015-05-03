@@ -16,8 +16,6 @@
 
 using namespace std;
 
-#define SOCKET_ERROR -1
-
 int TCPSocket::getSocketFileDescriptor() {
     return socketFd;
 }
@@ -41,14 +39,4 @@ struct sockaddr_in TCPSocket::socketAddr(string const &address, int port) {
     newAddr.sin_addr.s_addr = INADDR_ANY;
     memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
     return newAddr;
-}
-
-void TCPSocket::bindSocket(string const &address, int port) {
-    struct sockaddr_in addr_in = socketAddr(address, port);
-    int result = bind(socketFd, (struct sockaddr *)&addr_in, sizeof(addr_in));
-    if (result == SOCKET_ERROR) {
-        perror("Socket bind error");
-        printf("Socket bind error:%sn\n", strerror(errno));
-        exit(1);
-    }
 }
