@@ -44,5 +44,11 @@ struct sockaddr_in TCPSocket::socketAddr(const string &address, int port) {
 }
 
 int TCPSocket::shutDownSocket(TCPSocketShutDownHow how) {
-    return shutdown(this->socketFd, how);
+    int result = shutdown(this->socketFd, how);
+    if (result == SOCKET_ERROR) {
+        perror("Socket shutdown error");
+        printf("Socket shutdown error:%sn\n", strerror(errno));
+        return SOCKET_ERROR;
+    }
+    return result;
 }
