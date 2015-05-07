@@ -16,7 +16,6 @@
 class ServerSocket : public TCPSocket {
 private:
     int clientFd;
-    struct sockaddr_in connectionAddr;
     
 protected:
     struct sockaddr_in socketAddr(const string &address, int port);

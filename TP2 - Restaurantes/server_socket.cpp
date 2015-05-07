@@ -38,9 +38,9 @@ void ServerSocket::listenConnections(int backlog) {
 int ServerSocket::acceptConnection() {
     socklen_t socketLength = sizeof(struct sockaddr_in);
     int socketFd = getSocketFileDescriptor();
-    struct sockaddr *addr = (struct sockaddr *)&connectionAddr;
+    struct sockaddr_in *addr;
     
-    clientFd = accept(socketFd, addr, &socketLength);
+    clientFd = accept(socketFd, (struct sockaddr *)&addr, &socketLength);
     
     if (clientFd == SOCKET_ERROR) {
         perror("Socket accept error");
