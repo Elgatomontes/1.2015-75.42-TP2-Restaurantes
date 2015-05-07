@@ -17,7 +17,7 @@ ServerSocket::~ServerSocket() {
 }
 
 void ServerSocket::socketBind(const string &address, int port) {
-    struct sockaddr_in addr_in = socketAddr(address, port);
+    struct sockaddr_in addr_in = socketGetAddr(address, port);
     int socketFd = socketGetFileDescriptor();
     int result = bind(socketFd, (struct sockaddr *)&addr_in, sizeof(addr_in));
     if (result == SOCKET_ERROR) {
