@@ -42,3 +42,7 @@ struct sockaddr_in TCPSocket::socketAddr(const string &address, int port) {
     memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
     return newAddr;
 }
+
+int TCPSocket::shutDownSocket(TCPSocketShutDownHow how) {
+    return shutdown(this->socketFd, how);
+}

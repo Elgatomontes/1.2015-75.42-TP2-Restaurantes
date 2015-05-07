@@ -16,6 +16,12 @@ using namespace std;
 
 #define SOCKET_ERROR -1
 
+typedef enum {
+    TCPSocketShutDownHowReceiving = 0,
+    TCPSocketShutDownHowTransmit = 1,
+    TCPSocketShutDownHowBoth = 2
+} TCPSocketShutDownHow;
+
 class TCPSocket {
 private:
     int socketFd;
@@ -29,6 +35,8 @@ public:
     // Constructors and destructors.
     virtual ~TCPSocket();
     TCPSocket();
+    
+    int shutDownSocket(TCPSocketShutDownHow how);
 };
 
 #endif /* defined(__TP2___Restaurantes__common_socket__) */
