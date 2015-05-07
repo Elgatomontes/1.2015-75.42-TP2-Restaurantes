@@ -19,15 +19,15 @@ private:
     struct sockaddr_in connectionAddr;
     
 protected:
-    struct sockaddr_in socketAddr(string const &address, int port);
+    struct sockaddr_in socketAddr(const string &address, int port);
 
 public:
     // Constructors and destructors.
     virtual ~ServerSocket();
     ServerSocket() : TCPSocket() {};
     
-    // Sockets funstions.
-    void bindSocket(string const &address, int port);
+    // Sockets functions.
+    void bindSocket(const string &address, int port);
     void listenConnections(int backlog);
     int acceptConnection();
 };

@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <errno.h>
 
 #include "common_tcp_socket.h"
@@ -21,6 +22,7 @@ int TCPSocket::getSocketFileDescriptor() {
 }
 
 TCPSocket::~TCPSocket() {
+    close(this->socketFd);
     this->socketFd = 0;
 }
 
@@ -32,7 +34,7 @@ TCPSocket::TCPSocket() {
     }
 }
 
-struct sockaddr_in TCPSocket::socketAddr(string const &address, int port) {
+struct sockaddr_in TCPSocket::socketAddr(const string &address, int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

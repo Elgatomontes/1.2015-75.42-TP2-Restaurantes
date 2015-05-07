@@ -21,7 +21,7 @@ private:
     int socketFd;
     
 protected:
-    virtual struct sockaddr_in socketAddr(string const &address, int port);
+    virtual struct sockaddr_in socketAddr(const string &address, int port);
     int getSocketFileDescriptor();
     
     

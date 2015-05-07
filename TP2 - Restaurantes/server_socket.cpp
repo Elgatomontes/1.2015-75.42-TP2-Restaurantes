@@ -16,7 +16,7 @@
 ServerSocket::~ServerSocket() {
 }
 
-void ServerSocket::bindSocket(string const &address, int port) {
+void ServerSocket::bindSocket(const string &address, int port) {
     struct sockaddr_in addr_in = socketAddr(address, port);
     int socketFd = getSocketFileDescriptor();
     int result = bind(socketFd, (struct sockaddr *)&addr_in, sizeof(addr_in));
@@ -51,7 +51,7 @@ int ServerSocket::acceptConnection() {
     return clientFd;
 }
 
-struct sockaddr_in socketAddr(string const &address, int port) {
+struct sockaddr_in socketAddr(const string &address, int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);
