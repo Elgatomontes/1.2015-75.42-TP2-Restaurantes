@@ -18,7 +18,7 @@ private:
     int clientFd;
     
 protected:
-    struct sockaddr_in socketAddr(const string &address, int port);
+    struct sockaddr_in socketGetAddr(const string &address, int port);
 
 public:
     // Constructors and destructors.
@@ -26,9 +26,9 @@ public:
     ServerSocket() : TCPSocket() {};
     
     // Sockets functions.
-    void bindSocket(const string &address, int port);
-    void listenConnections(int backlog);
-    int acceptConnection();
+    void socketBind(const string &address, int port);
+    void socketListenConnections(int backlog);
+    int socketAcceptConnection();
 };
 
 #endif /* defined(__TP2___Restaurantes__server_socket__) */

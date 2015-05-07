@@ -17,7 +17,7 @@
 
 using namespace std;
 
-int TCPSocket::getSocketFileDescriptor() {
+int TCPSocket::socketGetFileDescriptor() {
     return socketFd;
 }
 
@@ -34,7 +34,7 @@ TCPSocket::TCPSocket() {
     }
 }
 
-struct sockaddr_in TCPSocket::socketAddr(const string &address, int port) {
+struct sockaddr_in TCPSocket::socketGetAddr(const string &address, int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);
@@ -43,7 +43,7 @@ struct sockaddr_in TCPSocket::socketAddr(const string &address, int port) {
     return newAddr;
 }
 
-int TCPSocket::shutDownSocket(TCPSocketShutDownHow how) {
+int TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
     int result = shutdown(this->socketFd, how);
     if (result == SOCKET_ERROR) {
         perror("Socket shutdown error");

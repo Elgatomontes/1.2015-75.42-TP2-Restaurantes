@@ -15,7 +15,7 @@
 
 class ClientSocket : public TCPSocket {
 protected:
-    struct sockaddr_in socketAddr(const string &address, int port);
+    struct sockaddr_in socketGetAddr(const string &address, int port);
     
 public:
     // Constructors and destructors.

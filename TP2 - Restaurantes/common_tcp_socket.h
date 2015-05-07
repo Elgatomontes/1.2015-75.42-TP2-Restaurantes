@@ -27,8 +27,8 @@ private:
     int socketFd;
     
 protected:
-    virtual struct sockaddr_in socketAddr(const string &address, int port);
-    int getSocketFileDescriptor();
+    virtual struct sockaddr_in socketGetAddr(const string &address, int port);
+    int socketGetFileDescriptor();
     
     
 public:
@@ -36,7 +36,7 @@ public:
     virtual ~TCPSocket();
     TCPSocket();
     
-    int shutDownSocket(TCPSocketShutDownHow how);
+    int socketShutDown(TCPSocketShutDownHow how);
 };
 
 #endif /* defined(__TP2___Restaurantes__common_socket__) */

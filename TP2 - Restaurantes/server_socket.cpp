@@ -16,9 +16,9 @@
 ServerSocket::~ServerSocket() {
 }
 
-void ServerSocket::bindSocket(const string &address, int port) {
+void ServerSocket::socketBind(const string &address, int port) {
     struct sockaddr_in addr_in = socketAddr(address, port);
-    int socketFd = getSocketFileDescriptor();
+    int socketFd = socketGetFileDescriptor();
     int result = bind(socketFd, (struct sockaddr *)&addr_in, sizeof(addr_in));
     if (result == SOCKET_ERROR) {
         perror("Socket bind error");
@@ -27,17 +27,17 @@ void ServerSocket::bindSocket(const string &address, int port) {
     }
 }
 
-void ServerSocket::listenConnections(int backlog) {
-    if (listen(getSocketFileDescriptor(), backlog)) {
+void ServerSocket::socketListenConnections(int backlog) {
+    if (listen(socketGetFileDescriptor(), backlog)) {
         perror("Socket listen error");
         printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);
     }
 }
 
-int ServerSocket::acceptConnection() {
+int ServerSocket::socketAcceptConnection() {
     socklen_t socketLength = sizeof(struct sockaddr_in);
-    int socketFd = getSocketFileDescriptor();
+    int socketFd = socketGetFileDescriptor();
     struct sockaddr_in *addr;
     
     clientFd = accept(socketFd, (struct sockaddr *)&addr, &socketLength);
@@ -51,7 +51,7 @@ int ServerSocket::acceptConnection() {
     return clientFd;
 }
 
-struct sockaddr_in socketAddr(const string &address, int port) {
+struct sockaddr_in socketGetAddr(const string &address, int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

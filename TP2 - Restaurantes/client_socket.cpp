@@ -13,7 +13,7 @@
 ClientSocket::~ClientSocket() {
 }
 
-struct sockaddr_in socketAddr(const string &address, int port) {
+struct sockaddr_in socketGetAddr(const string &address, int port) {
     // @TODO: Gastón - Esto va de otra forma.
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
