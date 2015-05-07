@@ -16,8 +16,8 @@
 ServerSocket::~ServerSocket() {
 }
 
-void ServerSocket::socketBind(const string &address, int port) {
-    struct sockaddr_in addr_in = socketGetAddr(address, port);
+void ServerSocket::socketBind(int port) {
+    struct sockaddr_in addr_in = socketGetAddr(port);
     int socketFd = socketGetFileDescriptor();
     int result = bind(socketFd, (struct sockaddr *)&addr_in, sizeof(addr_in));
     if (result == SOCKET_ERROR) {
@@ -51,7 +51,7 @@ int ServerSocket::socketAcceptConnection() {
     return clientFd;
 }
 
-struct sockaddr_in socketGetAddr(const string &address, int port) {
+struct sockaddr_in socketGetAddr(int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

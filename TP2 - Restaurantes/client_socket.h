@@ -15,12 +15,14 @@
 
 class ClientSocket : public TCPSocket {
 protected:
-    struct sockaddr_in socketGetAddr(const string &address, int port);
+    struct sockaddr_in socketGetAddr(int port);
     
 public:
     // Constructors and destructors.
     virtual ~ClientSocket();
     ClientSocket() : TCPSocket() {};
+    
+    void socketConnect(const string address, int port);
 };
 
 #endif /* defined(__TP2___Restaurantes__client_socket__) */

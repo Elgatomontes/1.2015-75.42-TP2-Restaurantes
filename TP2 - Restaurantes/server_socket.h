@@ -18,7 +18,7 @@ private:
     int clientFd;
     
 protected:
-    struct sockaddr_in socketGetAddr(const string &address, int port);
+    struct sockaddr_in socketGetAddr(int port);
 
 public:
     // Constructors and destructors.
@@ -26,7 +26,7 @@ public:
     ServerSocket() : TCPSocket() {};
     
     // Sockets functions.
-    void socketBind(const string &address, int port);
+    void socketBind(int port);
     void socketListenConnections(int backlog);
     int socketAcceptConnection();
 };

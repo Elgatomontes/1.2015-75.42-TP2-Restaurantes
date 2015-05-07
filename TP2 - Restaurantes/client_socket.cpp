@@ -7,18 +7,33 @@
 //
 
 #include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdlib.h>
+#include <errno.h>
 
 #include "client_socket.h"
 
 ClientSocket::~ClientSocket() {
 }
 
-struct sockaddr_in socketGetAddr(const string &address, int port) {
-    // @TODO: Gastón - Esto va de otra forma.
+struct sockaddr_in socketGetAddr(int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);
-    newAddr.sin_addr.s_addr = INADDR_ANY;
     memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
     return newAddr;
+}
+
+void ClientSocket::socketConnect(const string address, int port) {
+    struct sockaddr_in server_addr = socketGetAddr(port);
+    inet_pton(AF_INET, address.c_str(), &server_addr.sin_addr);
+    
+    struct sockaddr *addr = (struct sockaddr *)&server_addr;
+    socklen_t addr_size = sizeof(struct sockaddr);
+    
+    if (connect(socketGetFileDescriptor(), addr, addr_size)) {
+        perror("Socket listen error");
+        printf("Socket listen error:%sn\n", strerror(errno));
+        exit(1);
+    }
 }
