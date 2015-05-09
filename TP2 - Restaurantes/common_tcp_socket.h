@@ -36,7 +36,7 @@ public:
     virtual ~TCPSocket();
     TCPSocket();
     
-    void socketReceive();
+    const string socketReceive(size_t dataLength);
     void socketSend(const string data, size_t dataLength);
     void socketShutDown(TCPSocketShutDownHow how);
 };
