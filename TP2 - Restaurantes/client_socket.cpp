@@ -9,14 +9,17 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 
 #include "client_socket.h"
 
+using namespace std;
+
 ClientSocket::~ClientSocket() {
 }
 
-struct sockaddr_in socketGetAddr(int port) {
+struct sockaddr_in ClientSocket::socketGetAddr(int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

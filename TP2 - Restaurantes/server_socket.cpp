@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 
 #include "server_socket.h"
@@ -51,7 +52,7 @@ int ServerSocket::socketAcceptConnection() {
     return clientFd;
 }
 
-struct sockaddr_in socketGetAddr(int port) {
+struct sockaddr_in ServerSocket::socketGetAddr(int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

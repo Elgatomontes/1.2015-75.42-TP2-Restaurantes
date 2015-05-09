@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include <errno.h>
 
 #include "common_tcp_socket.h"
@@ -41,6 +42,14 @@ struct sockaddr_in TCPSocket::socketGetAddr(int port) {
     newAddr.sin_addr.s_addr = INADDR_ANY;
     memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
     return newAddr;
+}
+
+void TCPSocket::socketReceive() {
+
+}
+
+void TCPSocket::socketSend(const string data, size_t dataLength) {
+
 }
 
 void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
