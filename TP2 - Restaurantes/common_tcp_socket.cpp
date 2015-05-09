@@ -13,10 +13,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <string>
 
 #include "common_tcp_socket.h"
-
-using namespace std;
 
 int TCPSocket::socketGetFileDescriptor() {
     return this->socketFd;
@@ -44,13 +43,13 @@ struct sockaddr_in TCPSocket::socketGetAddr(int port) {
     return newAddr;
 }
 
-const string TCPSocket::socketReceive(size_t dataLength) {
+const std::string TCPSocket::socketReceive(size_t dataLength) {
 	size_t sizeReceived = 0;
-	string dataRecieved = "";
+	std::string dataRecieved = "";
 
 	while (sizeReceived < dataLength) {
 		int result;
-		string buffer;
+		std::string buffer;
 		result = recv(this->socketFd, &buffer, dataLength, 0);
 
 		if (result == SOCKET_ERROR) {
@@ -68,8 +67,7 @@ const string TCPSocket::socketReceive(size_t dataLength) {
 	return dataRecieved;
 }
 
-void TCPSocket::socketSend(const string data, size_t dataLength) {
-
+void TCPSocket::socketSend(const std::string data, size_t dataLength) {
 }
 
 void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {

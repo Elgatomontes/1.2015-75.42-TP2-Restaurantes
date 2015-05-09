@@ -25,7 +25,7 @@ public:
     virtual ~ServerSocket();
     ServerSocket() : TCPSocket() {
     	clientFd = 0;
-    };
+    }
     
     // Sockets functions.
     void socketBind(int port);

@@ -10,6 +10,7 @@
 #define __TP2___Restaurantes__client_socket__
 
 #include <stdio.h>
+#include <string>
 
 #include "common_tcp_socket.h"
 
@@ -20,9 +21,9 @@ protected:
 public:
     // Constructors and destructors.
     virtual ~ClientSocket();
-    ClientSocket() : TCPSocket() {};
+    ClientSocket() : TCPSocket() {}
     
-    void socketConnect(const string address, int port);
+    void socketConnect(const std::string address, int port);
 };
 
 #endif /* defined(__TP2___Restaurantes__client_socket__) */
