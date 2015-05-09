@@ -31,7 +31,7 @@ void ClientSocket::socketConnect(const string address, int port) {
     struct sockaddr *addr = (struct sockaddr *)&server_addr;
     socklen_t addr_size = sizeof(struct sockaddr);
     
-    if (connect(socketGetFileDescriptor(), addr, addr_size)) {
+    if (connect(socketGetFileDescriptor(), addr, addr_size) == SOCKET_ERROR) {
         perror("Socket listen error");
         printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);

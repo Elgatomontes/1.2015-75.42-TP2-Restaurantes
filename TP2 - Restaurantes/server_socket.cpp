@@ -28,7 +28,7 @@ void ServerSocket::socketBind(int port) {
 }
 
 void ServerSocket::socketListenConnections(int backlog) {
-    if (listen(socketGetFileDescriptor(), backlog)) {
+    if (listen(socketGetFileDescriptor(), backlog) == SOCKET_ERROR) {
         perror("Socket listen error");
         printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);
