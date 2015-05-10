@@ -67,7 +67,20 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
 	return dataRecieved;
 }
 
-void TCPSocket::socketSend(const std::string data, size_t dataLength) {
+void TCPSocket::socketSend(int socketDest, const std::string &data) {
+	int dataSended = 0;
+	int dataSize = sizeof(data);
+
+	while(dataSended < dataSize) {
+		int result;
+		result = send(socketDest, &data, dataSize, 0);
+
+		if (result == SOCKET_ERROR) {
+			perror("Socket send error");
+			printf("Socket send error:%sn\n", strerror(errno));
+			exit(1);
+		}
+	}
 }
 
 void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {

@@ -35,7 +35,7 @@ public:
     TCPSocket();
     
     const std::string socketReceive(size_t dataLength);
-    void socketSend(const std::string data, size_t dataLength);
+    void socketSend(int socketDest, const std::string &data);
     void socketShutDown(TCPSocketShutDownHow how);
 };
 
