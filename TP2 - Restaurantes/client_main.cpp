@@ -19,7 +19,8 @@ int main(int argc, const char * argv[]) {
 
     clientSocket.socketConnect(SOCKET_ADDRESS, SOCKET_PORT);
 
-    clientSocket.socketReceive(sizeof("Reciví tu conexión\n"));
+    std::string dataToSend("Reciví tu conexión\n");
+    clientSocket.socketReceive(sizeof(dataToSend.c_str()));
 
     return 0;
 }

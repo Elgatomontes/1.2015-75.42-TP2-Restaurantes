@@ -44,7 +44,7 @@ struct sockaddr_in TCPSocket::socketGetAddr(int port) {
 }
 
 const std::string TCPSocket::socketReceive(size_t dataLength) {
-	printf("Data length: %lu", dataLength);
+	printf("Data to receive length: %lu\n", dataLength);
 	char *buffer = new char(dataLength);
 	int result;
 
@@ -57,6 +57,7 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
 		exit(1);
 	}
 
+	printf("Lala\n");
 	std::string dataReceive(buffer);
 
 	delete(buffer);
@@ -68,7 +69,7 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
 
 void TCPSocket::socketSend(int socketDest, const std::string &data) {
 	size_t sendData = 0;
-	size_t dataSize = sizeof(data.c_str());
+	size_t dataSize = data.size();
 
 	while(sendData < dataSize) {
 		int result = send(socketDest, data.c_str(), dataSize, 0);

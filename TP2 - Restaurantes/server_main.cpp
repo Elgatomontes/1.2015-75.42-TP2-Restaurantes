@@ -19,17 +19,11 @@
 int main(int argc, const char * argv[]) {
 	ServerSocket serverSockFd;
 
-	printf("Bindeando al puerto: %d\n", SERVER_PORT);
 	serverSockFd.socketBind(SERVER_PORT);
-
-	printf("Escuchando conexiones...\n");
 	serverSockFd.socketListenConnections(SERVER_BACKLOG);
-
-	printf("Aceptando conexiones...\n");
 	int clientSocketFd = serverSockFd.socketAcceptConnection();
-
-	printf("Enviando datos...\n");
-	serverSockFd.socketSend(clientSocketFd, "Reciví tu conexión\n");
+	std::string dataToSend = "Reciví tu conexión\n";
+	serverSockFd.socketSend(clientSocketFd, dataToSend);
 
     return 0;
 }
