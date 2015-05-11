@@ -13,7 +13,7 @@
 
 #include "server_socket.h"
 
-#define SERVER_PORT 4321
+#define SERVER_PORT 43210
 #define SERVER_BACKLOG 20
 
 int main(int argc, const char * argv[]) {

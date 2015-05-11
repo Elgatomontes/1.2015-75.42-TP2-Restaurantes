@@ -12,7 +12,7 @@
 #include "client_socket.h"
 
 #define SOCKET_ADDRESS "127.0.0.1"
-#define SOCKET_PORT 4321
+#define SOCKET_PORT 43210
 
 int main(int argc, const char * argv[]) {
     ClientSocket clientSocket;

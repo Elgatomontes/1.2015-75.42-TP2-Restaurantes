@@ -59,7 +59,6 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
         if (result == SOCKET_ERROR) {
             perror("Socket receive error");
             printf("Socket receive error:%sn\n", strerror(errno));
-            delete(buffer);
             exit(1);
         }
         
@@ -93,7 +92,7 @@ void TCPSocket::socketSend(int socketDest, const std::string &data) {
 		printf("Datos parciales enviados: %lu/%lu\n", sendData, dataSize);
 	}
 
-	printf("Datos enviados: %lu/%lu cuyo texto: %s", sendData, dataSize, data.c_str());
+	printf("Datos enviados: %lu/%lu cuyo texto: %s\n", sendData, dataSize, data.c_str());
 }
 
 void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
@@ -102,4 +101,5 @@ void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
 		printf("Socket shutdown error:%sn\n", strerror(errno));
 		exit(1);
 	}
+	printf("Socket shutDown\n");
 }
