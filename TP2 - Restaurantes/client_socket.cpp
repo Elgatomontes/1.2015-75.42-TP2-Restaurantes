@@ -38,4 +38,6 @@ void ClientSocket::socketConnect(const std::string address, int port) {
         printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);
     }
+
+    printf("Se conectó correctamente a la dirección: %s y puerto %d\n", address.c_str(), port);
 }
