@@ -18,75 +18,78 @@
 #include "common_tcp_socket.h"
 
 int TCPSocket::socketGetFileDescriptor() {
-    return this->socketFd;
+	return this->socketFd;
 }
 
 TCPSocket::~TCPSocket() {
-    close(this->socketFd);
-    this->socketFd = 0;
+	close(this->socketFd);
+	this->socketFd = 0;
 }
 
 TCPSocket::TCPSocket() {
-    if ((socketFd = socket(AF_INET,SOCK_STREAM,0)) == SOCKET_ERROR) {
-        perror("Socket creation error");
-        printf("Socket creation error:%sn\n", strerror(errno));
-        exit(1);
-    }
+	if ((socketFd = socket(AF_INET,SOCK_STREAM,0)) == SOCKET_ERROR) {
+		perror("Socket creation error");
+		printf("Socket creation error:%sn\n", strerror(errno));
+		exit(1);
+	}
 }
 
 struct sockaddr_in TCPSocket::socketGetAddr(int port) {
-    struct sockaddr_in newAddr;
-    newAddr.sin_family = AF_INET;
-    newAddr.sin_port = htons(port);
-    newAddr.sin_addr.s_addr = INADDR_ANY;
-    memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
-    return newAddr;
+	struct sockaddr_in newAddr;
+	newAddr.sin_family = AF_INET;
+	newAddr.sin_port = htons(port);
+	newAddr.sin_addr.s_addr = INADDR_ANY;
+	memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
+	return newAddr;
 }
 
 const std::string TCPSocket::socketReceive(size_t dataLength) {
-	size_t sizeReceived = 0;
-	std::string dataRecieved = "";
+	printf("Data length: %lu", dataLength);
+	char *buffer = new char(dataLength);
+	int result;
 
-	while (sizeReceived < dataLength) {
-		int result;
-		std::string buffer;
-		result = recv(this->socketFd, &buffer, dataLength, 0);
+	result = recv(this->socketFd, buffer, dataLength, 0);
 
-		if (result == SOCKET_ERROR) {
-			perror("Socket recieve error");
-			printf("Socket recieve error:%sn\n", strerror(errno));
-			exit(1);
-		}
-
-		sizeReceived += result;
-		dataRecieved += buffer;
-		printf("Recibido: %s\n", buffer.c_str());
+	if (result == SOCKET_ERROR) {
+		perror("Socket send error");
+		printf("Socket send error:%sn\n", strerror(errno));
+		delete(buffer);
+		exit(1);
 	}
-	printf("Texto final recibido: %s\n", dataRecieved.c_str());
 
-	return dataRecieved;
+	std::string dataReceive(buffer);
+
+	delete(buffer);
+
+	printf("Datos recibidos: %s", dataReceive.c_str());
+
+	return dataReceive;
 }
 
 void TCPSocket::socketSend(int socketDest, const std::string &data) {
-	int dataSended = 0;
-	int dataSize = sizeof(data);
+	size_t sendData = 0;
+	size_t dataSize = sizeof(data.c_str());
 
-	while(dataSended < dataSize) {
-		int result;
-		result = send(socketDest, &data, dataSize, 0);
+	while(sendData < dataSize) {
+		int result = send(socketDest, data.c_str(), dataSize, 0);
 
 		if (result == SOCKET_ERROR) {
 			perror("Socket send error");
 			printf("Socket send error:%sn\n", strerror(errno));
 			exit(1);
 		}
+
+		sendData += result;
+		printf("Datos parciales enviados: %lu/%lu\n", sendData, dataSize);
 	}
+
+	printf("Datos enviados: %lu/%lu cuyo texto: %s", sendData, dataSize, data.c_str());
 }
 
 void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
-    if (shutdown(this->socketFd, how) == SOCKET_ERROR) {
-        perror("Socket shutdown error");
-        printf("Socket shutdown error:%sn\n", strerror(errno));
-        exit(1);
-    }
+	if (shutdown(this->socketFd, how) == SOCKET_ERROR) {
+		perror("Socket shutdown error");
+		printf("Socket shutdown error:%sn\n", strerror(errno));
+		exit(1);
+	}
 }
