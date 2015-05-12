@@ -6,19 +6,21 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include "server_process_client_thread.h"
 #include "common_tcp_socket.h"
 #include "server_thread.h"
 
 ServerThread::~ServerThread() {
     
 }
-void ServerThread::runThread() {
+
+void ServerThread::threadRun() {
+    printf("Corriendo hilo para el accept del server\n");
     while (this->serverSocket.socketGetKeepTalking() == true) {
+        printf("Estoy por aceptar una conexión en el loop\n");
         int clientSocketFd = this->serverSocket.socketAcceptConnection();
         TCPSocket clientSocket(clientSocketFd);
-        
-        // @TODO: Gastón - Esto es un thread aparte.
-        std::string dataToSend = "Recibi tu conexion";
-        clientSocket.socketSend(dataToSend);
+        ProcessClientThread clientThread(this->serverSocket, clientSocket);
+        clientThread.threadJoin();
     }
 }

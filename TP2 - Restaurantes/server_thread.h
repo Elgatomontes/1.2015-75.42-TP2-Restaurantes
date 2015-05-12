@@ -21,9 +21,11 @@ private:
 public:
     // Constructors and destructors.
     virtual ~ServerThread();
-    ServerThread(ServerSocket &socket) : POSIXThread(), serverSocket(socket) {}
+    ServerThread(ServerSocket &socket) : POSIXThread(), serverSocket(socket) {
+        printf("Server Thread creado\n");
+    }
     
-    void runThread();
+    void threadRun();
 };
 
 #endif /* defined(__TP2___Restaurantes__server_thread__) */

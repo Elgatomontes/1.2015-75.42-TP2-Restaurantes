@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
         serverSock.socketShutDown(TCPSocketShutDownHowBoth);
     }
     
-    serverThread.join();
+    serverThread.threadJoin();
     
     return 0;
 }

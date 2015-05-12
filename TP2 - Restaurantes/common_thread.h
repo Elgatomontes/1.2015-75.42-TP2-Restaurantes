@@ -23,8 +23,8 @@ public:
     virtual ~POSIXThread();
     POSIXThread();
     
-    void join();
-    virtual void runThread();
+    void threadJoin();
+    virtual void threadRun();
 };
 
 #endif /* defined(__TP2___Restaurantes__common_thread__) */

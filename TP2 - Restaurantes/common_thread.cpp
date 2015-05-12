@@ -26,9 +26,11 @@ POSIXThread::POSIXThread() {
         printf("Thread create error:%sn\n", strerror(errno));
         exit(1);
     }
+    
+    printf("Thread creado\n");
 }
 
-void POSIXThread::join() {
+void POSIXThread::threadJoin() {
     int res = pthread_join(this->thread, NULL);
     
     if (res != POSIX_THREAD_SUCCESS) {
@@ -36,13 +38,16 @@ void POSIXThread::join() {
         printf("Thread join error:%sn\n", strerror(errno));
         exit(1);
     }
+    
+    printf("Thread join\n");
 }
 
-void POSIXThread::runThread() {
+void POSIXThread::threadRun() {
 }
 
 void *POSIXThread::routine(void *data) {
+    printf("Run routine\n");
     POSIXThread *thread = (POSIXThread *)data;
-    thread->runThread();
+    thread->threadRun();
     return NULL;
 }
