@@ -24,6 +24,7 @@ typedef enum {
 class TCPSocket {
 private:
     int socketFd;
+    bool keepTalking;
     
 protected:
     virtual struct sockaddr_in socketGetAddr(int port);
@@ -34,6 +35,10 @@ public:
     virtual ~TCPSocket();
     TCPSocket();
     TCPSocket(int socketFd);
+    
+    // Getters and setters.
+    void socketSetKeepTalking(bool keepTalking);
+    bool socketGetKeepTalking();
     
     const std::string socketReceive(size_t dataLength);
     void socketSend(const std::string &data);

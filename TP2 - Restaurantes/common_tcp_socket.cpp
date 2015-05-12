@@ -28,13 +28,16 @@ TCPSocket::~TCPSocket() {
 }
 
 TCPSocket::TCPSocket(int socketFd) {
+    keepTalking = true;
     this->socketFd = socketFd;
 }
 
 TCPSocket::TCPSocket() {
+    keepTalking = true;
 	if ((socketFd = socket(AF_INET,SOCK_STREAM,0)) == SOCKET_ERROR) {
 		perror("Socket creation error");
 		printf("Socket creation error: %sn\n", strerror(errno));
+        keepTalking = false;
 		exit(1);
 	}
 }
@@ -112,4 +115,12 @@ void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
 		exit(1);
 	}
 	printf("Socket shutDown\n");
+}
+
+void TCPSocket::socketSetKeepTalking(bool keepTalking) {
+    this->keepTalking = keepTalking;
+}
+
+bool TCPSocket::socketGetKeepTalking() {
+    return this->keepTalking;
 }
