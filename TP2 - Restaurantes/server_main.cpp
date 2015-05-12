@@ -18,12 +18,11 @@
 
 int main(int argc, const char * argv[]) {
 	ServerSocket serverSockFd;
-
 	serverSockFd.socketBind(SERVER_PORT);
 	serverSockFd.socketListenConnections(SERVER_BACKLOG);
 	int clientSocketFd = serverSockFd.socketAcceptConnection();
-	std::string dataToSend = "Reciví tu conexión\n";
+	std::string dataToSend = "Recibi tu conexion";
 	serverSockFd.socketSend(clientSocketFd, dataToSend);
-
+    serverSockFd.socketShutDown(TCPSocketShutDownHowBoth);
     return 0;
 }

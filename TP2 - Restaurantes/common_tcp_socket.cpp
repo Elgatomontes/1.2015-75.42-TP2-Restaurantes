@@ -14,6 +14,7 @@
 #include <string.h>
 #include <errno.h>
 #include <string>
+#include <vector>
 
 #include "common_tcp_socket.h"
 
@@ -45,26 +46,34 @@ struct sockaddr_in TCPSocket::socketGetAddr(int port) {
 
 const std::string TCPSocket::socketReceive(size_t dataLength) {
 	printf("Data to receive length: %lu\n", dataLength);
-	char *buffer = new char(dataLength);
-	int result;
-
-	result = recv(this->socketFd, buffer, dataLength, 0);
-
-	if (result == SOCKET_ERROR) {
-		perror("Socket send error");
-		printf("Socket send error:%sn\n", strerror(errno));
-		delete(buffer);
-		exit(1);
-	}
-
-	printf("Lala\n");
-	std::string dataReceive(buffer);
-
-	delete(buffer);
-
-	printf("Datos recibidos: %s", dataReceive.c_str());
-
-	return dataReceive;
+    size_t receivedData = 0;
+    std::string dataReceived;
+    
+    while (receivedData < dataLength) {
+        int result;
+        std::vector<char> buffer;
+        buffer.resize(dataLength - receivedData, 0);
+        
+        result = recv(this->socketFd, &(buffer[0]), dataLength, 0);
+        
+        if (result == SOCKET_ERROR) {
+            perror("Socket receive error");
+            printf("Socket receive error:%sn\n", strerror(errno));
+            delete(buffer);
+            exit(1);
+        }
+        
+        receivedData += result;
+        std::string bufferStr(buffer.begin(), buffer.end());
+        std::string acumStr(dataReceived.c_str());
+        dataReceived = acumStr + bufferStr;
+        
+        printf("Datos parciales recibidos: %lu/%lu Texto: %s\n", receivedData, dataLength, bufferStr.c_str());
+        printf("Acumulado: %s\n", dataReceived.c_str());
+    }
+    
+    printf("Datos recibidos: %s\n", dataReceived.c_str());
+    return dataReceived;
 }
 
 void TCPSocket::socketSend(int socketDest, const std::string &data) {

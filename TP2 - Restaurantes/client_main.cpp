@@ -16,11 +16,9 @@
 
 int main(int argc, const char * argv[]) {
     ClientSocket clientSocket;
-
     clientSocket.socketConnect(SOCKET_ADDRESS, SOCKET_PORT);
-
-    std::string dataToSend("Reciví tu conexión\n");
-    clientSocket.socketReceive(sizeof(dataToSend.c_str()));
-
+    std::string dataToSend = "Recibi tu conexion";
+    clientSocket.socketReceive(dataToSend.size());
+    clientSocket.socketShutDown(TCPSocketShutDownHowBoth);
     return 0;
 }
