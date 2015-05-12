@@ -34,15 +34,6 @@ TCPSocket::TCPSocket() {
     }
 }
 
-void TCPSocket::socketSend(const string &data, size_t dataLength) {
-    
-}
-
-const string TCPSocket::socketReceive() {
-    const string newString = "nada";
-    return newString;
-}
-
 struct sockaddr_in TCPSocket::socketGetAddr(int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
