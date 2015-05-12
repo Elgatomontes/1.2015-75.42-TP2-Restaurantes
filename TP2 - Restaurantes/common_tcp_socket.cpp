@@ -27,6 +27,10 @@ TCPSocket::~TCPSocket() {
 	this->socketFd = 0;
 }
 
+TCPSocket::TCPSocket(int socketFd) {
+    this->socketFd = socketFd;
+}
+
 TCPSocket::TCPSocket() {
 	if ((socketFd = socket(AF_INET,SOCK_STREAM,0)) == SOCKET_ERROR) {
 		perror("Socket creation error");
@@ -76,13 +80,13 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
     return dataReceived;
 }
 
-void TCPSocket::socketSend(int socketDest, const std::string &data) {
+void TCPSocket::socketSend(const std::string &data) {
 	size_t sendData = 0;
 	size_t dataSize = data.size();
     bool socketOpen = true;
 
 	while(sendData < dataSize && socketOpen == true) {
-		int result = send(socketDest, data.c_str(), dataSize, 0);
+		int result = send(this->socketFd, data.c_str(), dataSize, 0);
 
 		if (result == SOCKET_ERROR) {
 			perror("Socket send error");

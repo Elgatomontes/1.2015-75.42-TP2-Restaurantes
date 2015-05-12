@@ -33,9 +33,10 @@ public:
     // Constructors and destructors.
     virtual ~TCPSocket();
     TCPSocket();
+    TCPSocket(int socketFd);
     
     const std::string socketReceive(size_t dataLength);
-    void socketSend(int socketDest, const std::string &data);
+    void socketSend(const std::string &data);
     void socketShutDown(TCPSocketShutDownHow how);
 };
 
