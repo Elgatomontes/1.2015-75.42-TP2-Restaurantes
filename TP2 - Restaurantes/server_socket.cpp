@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 
 #include "server_socket.h"
@@ -25,6 +26,8 @@ void ServerSocket::socketBind(int port) {
         printf("Socket bind error:%sn\n", strerror(errno));
         exit(1);
     }
+
+    printf("Bindeado al puerto: %d\n", port);
 }
 
 void ServerSocket::socketListenConnections(int backlog) {
@@ -33,6 +36,8 @@ void ServerSocket::socketListenConnections(int backlog) {
         printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);
     }
+
+    printf("Escuchando conexiones...\n");
 }
 
 int ServerSocket::socketAcceptConnection() {
@@ -48,10 +53,12 @@ int ServerSocket::socketAcceptConnection() {
         exit(1);
     }
     
+    printf("Conexión entrante acceptada\n");
+
     return clientFd;
 }
 
-struct sockaddr_in socketGetAddr(int port) {
+struct sockaddr_in ServerSocket::socketGetAddr(int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);

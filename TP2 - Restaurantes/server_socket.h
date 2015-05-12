@@ -23,7 +23,9 @@ protected:
 public:
     // Constructors and destructors.
     virtual ~ServerSocket();
-    ServerSocket() : TCPSocket() {};
+    ServerSocket() : TCPSocket() {
+    	clientFd = 0;
+    }
     
     // Sockets functions.
     void socketBind(int port);

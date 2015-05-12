@@ -9,7 +9,18 @@
 #include <stdio.h>
 #include <iostream>
 
+#include "client_socket.h"
+
+#define SOCKET_ADDRESS "127.0.0.1"
+#define SOCKET_PORT 4321
+
 int main(int argc, const char * argv[]) {
-    std::cout << "Hello, World Client!\n";
+    ClientSocket clientSocket;
+
+    clientSocket.socketConnect(SOCKET_ADDRESS, SOCKET_PORT);
+
+    std::string dataToSend("Reciví tu conexión\n");
+    clientSocket.socketReceive(sizeof(dataToSend.c_str()));
+
     return 0;
 }

@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include <string>
 
-using namespace std;
-
 #define SOCKET_ERROR -1
 
 typedef enum {
@@ -36,6 +34,8 @@ public:
     virtual ~TCPSocket();
     TCPSocket();
     
+    const std::string socketReceive(size_t dataLength);
+    void socketSend(int socketDest, const std::string &data);
     void socketShutDown(TCPSocketShutDownHow how);
 };
 

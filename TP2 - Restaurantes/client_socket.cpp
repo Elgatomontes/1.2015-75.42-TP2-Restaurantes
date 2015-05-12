@@ -9,14 +9,16 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
+#include <string>
 
 #include "client_socket.h"
 
 ClientSocket::~ClientSocket() {
 }
 
-struct sockaddr_in socketGetAddr(int port) {
+struct sockaddr_in ClientSocket::socketGetAddr(int port) {
     struct sockaddr_in newAddr;
     newAddr.sin_family = AF_INET;
     newAddr.sin_port = htons(port);
@@ -24,7 +26,7 @@ struct sockaddr_in socketGetAddr(int port) {
     return newAddr;
 }
 
-void ClientSocket::socketConnect(const string address, int port) {
+void ClientSocket::socketConnect(const std::string address, int port) {
     struct sockaddr_in server_addr = socketGetAddr(port);
     inet_pton(AF_INET, address.c_str(), &server_addr.sin_addr);
     
@@ -36,4 +38,6 @@ void ClientSocket::socketConnect(const string address, int port) {
         printf("Socket listen error:%sn\n", strerror(errno));
         exit(1);
     }
+
+    printf("Se conectó correctamente a la dirección: %s y puerto %d\n", address.c_str(), port);
 }
