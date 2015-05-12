@@ -23,12 +23,6 @@ int main(int argc, const char * argv[]) {
 	serverSock.socketListenConnections(SERVER_BACKLOG);
     
     ServerThread serverThread(serverSock);
-    serverThread.runThread();
-//    // Esto va en un thread.
-//    int clientSocketFd = serverSockFd.socketAcceptConnection();
-//    std::string dataToSend = "Recibi tu conexion";
-//    serverSockFd.socketSend(clientSocketFd, dataToSend);
-//    serverSockFd.socketShutDown(TCPSocketShutDownHowBoth);
     
     char inputChar;
     std::cin >> inputChar;

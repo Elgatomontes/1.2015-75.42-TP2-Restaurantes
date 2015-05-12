@@ -12,5 +12,9 @@ ServerThread::~ServerThread() {
     
 }
 void ServerThread::runThread() {
-    
+    while (this->serverSocket.socketGetKeepTalking() == true) {
+        int clientSocketFd = this->serverSocket.socketAcceptConnection();
+        std::string dataToSend = "Recibi tu conexion";
+        this->serverSocket.socketSend(clientSocketFd, dataToSend);
+    }
 }
