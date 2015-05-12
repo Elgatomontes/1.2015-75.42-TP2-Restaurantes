@@ -11,11 +11,13 @@
 
 #include <stdio.h>
 
-class Thread {
+class POSIXThread {
 private:
     
 public:
-
+    // Constructors and destructors.
+    virtual ~POSIXThread();
+    POSIXThread();
 };
 
 #endif /* defined(__TP2___Restaurantes__common_thread__) */

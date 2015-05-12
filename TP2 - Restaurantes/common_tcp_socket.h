@@ -28,7 +28,6 @@ protected:
     virtual struct sockaddr_in socketGetAddr(int port);
     int socketGetFileDescriptor();
     
-    
 public:
     // Constructors and destructors.
     virtual ~TCPSocket();

@@ -7,3 +7,9 @@
 //
 
 #include "common_thread.h"
+
+POSIXThread::~POSIXThread() {
+}
+
+POSIXThread::POSIXThread() {
+}
