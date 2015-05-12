@@ -10,14 +10,21 @@
 #define __TP2___Restaurantes__common_thread__
 
 #include <stdio.h>
+#include <pthread.h>
 
 class POSIXThread {
 private:
+    pthread_t thread;
+    
+    static void *threadFunction(void *data);
     
 public:
     // Constructors and destructors.
     virtual ~POSIXThread();
     POSIXThread();
+    
+    void join();
+    virtual void runThread();
 };
 
 #endif /* defined(__TP2___Restaurantes__common_thread__) */

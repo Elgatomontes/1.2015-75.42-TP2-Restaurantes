@@ -12,4 +12,17 @@ POSIXThread::~POSIXThread() {
 }
 
 POSIXThread::POSIXThread() {
+    if (pthread_create(&this->thread, NULL, POSIXThread::threadFunction, this)) {
+        
+    }
+}
+
+void POSIXThread::join() {
+}
+
+void POSIXThread::runThread() {
+}
+
+void *POSIXThread::threadFunction(void *data) {
+    return NULL;
 }
