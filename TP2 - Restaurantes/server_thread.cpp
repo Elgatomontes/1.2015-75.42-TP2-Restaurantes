@@ -8,6 +8,9 @@
 
 #include "server_thread.h"
 
+ServerThread::~ServerThread() {
+    
+}
 void ServerThread::runThread() {
     
 }
