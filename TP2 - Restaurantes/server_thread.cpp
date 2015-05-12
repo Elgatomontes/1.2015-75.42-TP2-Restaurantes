@@ -25,9 +25,10 @@ void ServerThread::threadRun() {
         printf("Estoy por aceptar una conexión en el loop\n");
         int clientSocketFd = this->serverSocket.socketAcceptConnection();
         TCPSocket clientSocket(clientSocketFd);
-        ProcessClientThread clientThread(this->serverSocket, clientSocket);
+        ProcessClientThread *clientThread;
+        clientThread = new ProcessClientThread(this->serverSocket, clientSocket);
 
-        this->threadList->insert(this->threadList->end(), clientThread);
+        this->threadList->insert(this->threadList->end(), *clientThread);
         
         std::list<ProcessClientThread>::iterator it;
         for (it = this->threadList->begin(); it != this->threadList->end(); it++) {
@@ -36,6 +37,8 @@ void ServerThread::threadRun() {
             thread.threadJoin();
             this->threadList->erase(it);
         }
+        
+        delete clientThread;
     }
     
     printf("SALÍ DEL WHILE :S\n");
