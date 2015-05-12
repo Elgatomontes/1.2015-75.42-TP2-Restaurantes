@@ -34,9 +34,8 @@ int main(int argc, const char * argv[]) {
     if (inputChar == 'q') {
         serverSock.socketSetKeepTalking(false);
         serverSock.socketShutDown(TCPSocketShutDownHowBoth);
+        serverThread.threadJoin();
     }
-    
-    serverThread.threadJoin();
     
     return 0;
 }

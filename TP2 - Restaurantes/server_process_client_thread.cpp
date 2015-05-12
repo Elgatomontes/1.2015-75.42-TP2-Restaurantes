@@ -16,5 +16,6 @@ void ProcessClientThread::threadRun() {
     printf("Corriendo hilo para el send del server/client\n");
     std::string dataToSend = "Recibi tu conexion";
     this->clientSocket.socketSend(dataToSend);
+    printf("Envíe correctamente los datos\n");
     this->serverSocket.socketGetKeepTalking();
 }

@@ -109,6 +109,7 @@ void TCPSocket::socketSend(const std::string &data) {
 }
 
 void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
+    this->keepTalking = false;
 	if (shutdown(this->socketFd, how) == SOCKET_ERROR) {
 		perror("Socket shutdown error");
 		printf("Socket shutdown error: %sn\n", strerror(errno));

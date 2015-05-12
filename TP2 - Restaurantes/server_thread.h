@@ -10,20 +10,21 @@
 #define __TP2___Restaurantes__server_thread__
 
 #include <stdio.h>
+#include <list>
 
+#include "server_process_client_thread.h"
 #include "common_thread.h"
 #include "server_socket.h"
 
 class ServerThread : public POSIXThread {
 private:
     ServerSocket &serverSocket;
+    std::list<ProcessClientThread> *acceptedThreadList;
     
 public:
     // Constructors and destructors.
     virtual ~ServerThread();
-    ServerThread(ServerSocket &socket) : POSIXThread(), serverSocket(socket) {
-        printf("Server Thread creado\n");
-    }
+    ServerThread(ServerSocket &socket);
     
     void threadRun();
 };
