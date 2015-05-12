@@ -37,10 +37,6 @@ TCPSocket::TCPSocket() {
 
 struct sockaddr_in TCPSocket::socketGetAddr(int port) {
 	struct sockaddr_in newAddr;
-	newAddr.sin_family = AF_INET;
-	newAddr.sin_port = htons(port);
-	newAddr.sin_addr.s_addr = INADDR_ANY;
-	memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
 	return newAddr;
 }
 

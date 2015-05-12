@@ -16,7 +16,7 @@ class POSIXThread {
 private:
     pthread_t thread;
     
-    static void *threadFunction(void *data);
+    static void *routine(void *data);
     
 public:
     // Constructors and destructors.
