@@ -28,9 +28,10 @@ void ServerThread::threadRun() {
         ProcessClientThread *clientThread;
         clientThread = new ProcessClientThread(this->serverSocket, clientSocket);
 
-        this->threadList->insert(this->threadList->end(), *clientThread);
         
-        std::list<ProcessClientThread>::iterator it;
+        std::list<ProcessClientThread>::iterator it = this->threadList->end();
+        this->threadList->insert(it, *clientThread);
+        
         for (it = this->threadList->begin(); it != this->threadList->end(); it++) {
             ProcessClientThread thread = *it;
             
