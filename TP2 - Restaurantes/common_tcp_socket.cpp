@@ -30,7 +30,7 @@ TCPSocket::~TCPSocket() {
 TCPSocket::TCPSocket() {
 	if ((socketFd = socket(AF_INET,SOCK_STREAM,0)) == SOCKET_ERROR) {
 		perror("Socket creation error");
-		printf("Socket creation error:%sn\n", strerror(errno));
+		printf("Socket creation error: %sn\n", strerror(errno));
 		exit(1);
 	}
 }
@@ -44,8 +44,9 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
 	printf("Data to receive length: %lu\n", dataLength);
     size_t receivedData = 0;
     std::string dataReceived;
+    bool socketOpen = true;
     
-    while (receivedData < dataLength) {
+    while (receivedData < dataLength && socketOpen == true) {
         int result;
         std::vector<char> buffer;
         buffer.resize(dataLength - receivedData, 0);
@@ -54,8 +55,12 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
         
         if (result == SOCKET_ERROR) {
             perror("Socket receive error");
-            printf("Socket receive error:%sn\n", strerror(errno));
+            printf("Socket receive error: %sn\n", strerror(errno));
             exit(1);
+        } else if (result == SOCKET_CLOSE) {
+            perror("Socket receive close");
+            printf("Socket receive close: %sn\n", strerror(errno));
+            socketOpen = false;
         }
         
         receivedData += result;
@@ -74,15 +79,20 @@ const std::string TCPSocket::socketReceive(size_t dataLength) {
 void TCPSocket::socketSend(int socketDest, const std::string &data) {
 	size_t sendData = 0;
 	size_t dataSize = data.size();
+    bool socketOpen = true;
 
-	while(sendData < dataSize) {
+	while(sendData < dataSize && socketOpen == true) {
 		int result = send(socketDest, data.c_str(), dataSize, 0);
 
 		if (result == SOCKET_ERROR) {
 			perror("Socket send error");
-			printf("Socket send error:%sn\n", strerror(errno));
+			printf("Socket send error: %sn\n", strerror(errno));
 			exit(1);
-		}
+        } else if (result == SOCKET_CLOSE) {
+            perror("Socket receive close");
+            printf("Socket receive close: %sn\n", strerror(errno));
+            socketOpen = false;
+        }
 
 		sendData += result;
 		printf("Datos parciales enviados: %lu/%lu\n", sendData, dataSize);
@@ -94,7 +104,7 @@ void TCPSocket::socketSend(int socketDest, const std::string &data) {
 void TCPSocket::socketShutDown(TCPSocketShutDownHow how) {
 	if (shutdown(this->socketFd, how) == SOCKET_ERROR) {
 		perror("Socket shutdown error");
-		printf("Socket shutdown error:%sn\n", strerror(errno));
+		printf("Socket shutdown error: %sn\n", strerror(errno));
 		exit(1);
 	}
 	printf("Socket shutDown\n");

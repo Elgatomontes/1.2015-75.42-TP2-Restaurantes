@@ -13,6 +13,7 @@
 #include <string>
 
 #define SOCKET_ERROR -1
+#define SOCKET_CLOSE 0
 
 typedef enum {
     TCPSocketShutDownHowReceiving = 0,
