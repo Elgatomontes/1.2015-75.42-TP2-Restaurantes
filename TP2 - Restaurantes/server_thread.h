@@ -19,7 +19,7 @@
 class ServerThread : public POSIXThread {
 private:
     ServerSocket &serverSocket;
-    std::list<ProcessClientThread> *acceptedThreadList;
+    std::list<ProcessClientThread> *threadList;
     
 public:
     // Constructors and destructors.

@@ -15,7 +15,6 @@
 #define POSIX_THREAD_SUCCESS 0
 
 POSIXThread::~POSIXThread() {
-    pthread_exit(NULL);
 }
 
 POSIXThread::POSIXThread() {
@@ -23,7 +22,6 @@ POSIXThread::POSIXThread() {
 
     if (res != POSIX_THREAD_SUCCESS) {
         perror("Thread create error");
-        printf("Thread create error:%sn\n", strerror(errno));
         exit(1);
     }
     
@@ -35,7 +33,6 @@ void POSIXThread::threadJoin() {
     
     if (res != POSIX_THREAD_SUCCESS) {
         perror("Thread join error");
-        printf("Thread join error:%sn\n", strerror(errno));
         exit(1);
     }
     
