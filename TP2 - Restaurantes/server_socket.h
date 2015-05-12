@@ -16,6 +16,7 @@
 class ServerSocket : public TCPSocket {
 private:
     int clientFd;
+    bool keepTalking;
     
 protected:
     struct sockaddr_in socketGetAddr(int port);
@@ -25,7 +26,12 @@ public:
     virtual ~ServerSocket();
     ServerSocket() : TCPSocket() {
     	clientFd = 0;
+        keepTalking = true;
     }
+    
+    // Getters and setters.
+    void socketSetKeepTalking(bool keepTalking);
+    bool socketGetKeepTalking();
     
     // Sockets functions.
     void socketBind(int port);

@@ -66,3 +66,11 @@ struct sockaddr_in ServerSocket::socketGetAddr(int port) {
     memset(&(newAddr.sin_zero), 0, sizeof(newAddr.sin_zero));
     return newAddr;
 }
+
+void ServerSocket::socketSetKeepTalking(bool keepTalking) {
+    this->keepTalking = keepTalking;
+}
+
+bool ServerSocket::socketGetKeepTalking() {
+    return this->keepTalking;
+}

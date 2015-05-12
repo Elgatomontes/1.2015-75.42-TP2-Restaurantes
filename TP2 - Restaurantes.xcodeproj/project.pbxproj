@@ -11,6 +11,7 @@
 		872E26881AF55A3A0020B3D6 /* server_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 872E26861AF55A3A0020B3D6 /* server_socket.cpp */; };
 		872E26B91AF59E910020B3D6 /* client_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 872E26B71AF59E910020B3D6 /* client_socket.cpp */; };
 		875D4C6B1B01C96800B1FF81 /* common_thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 875D4C691B01C96800B1FF81 /* common_thread.cpp */; };
+		875D4C6E1B022CA100B1FF81 /* server_thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 875D4C6C1B022CA100B1FF81 /* server_thread.cpp */; };
 		8777B5731AF54D55008E8481 /* server_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8777B5721AF54D55008E8481 /* server_main.cpp */; };
 		8777B5751AF54D71008E8481 /* client_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8777B5741AF54D71008E8481 /* client_main.cpp */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,8 @@
 		872E26B81AF59E910020B3D6 /* client_socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client_socket.h; sourceTree = "<group>"; };
 		875D4C691B01C96800B1FF81 /* common_thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common_thread.cpp; sourceTree = "<group>"; };
 		875D4C6A1B01C96800B1FF81 /* common_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_thread.h; sourceTree = "<group>"; };
+		875D4C6C1B022CA100B1FF81 /* server_thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server_thread.cpp; sourceTree = "<group>"; };
+		875D4C6D1B022CA100B1FF81 /* server_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = server_thread.h; sourceTree = "<group>"; };
 		8777B5651AF48EF5008E8481 /* TP2 - Restaurantes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "TP2 - Restaurantes"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8777B5721AF54D55008E8481 /* server_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server_main.cpp; sourceTree = "<group>"; };
 		8777B5741AF54D71008E8481 /* client_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = client_main.cpp; sourceTree = "<group>"; };
@@ -84,6 +87,8 @@
 				8777B5721AF54D55008E8481 /* server_main.cpp */,
 				872E26861AF55A3A0020B3D6 /* server_socket.cpp */,
 				872E26871AF55A3A0020B3D6 /* server_socket.h */,
+				875D4C6C1B022CA100B1FF81 /* server_thread.cpp */,
+				875D4C6D1B022CA100B1FF81 /* server_thread.h */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 				872E26B91AF59E910020B3D6 /* client_socket.cpp in Sources */,
 				872E26881AF55A3A0020B3D6 /* server_socket.cpp in Sources */,
 				872E26851AF55A1E0020B3D6 /* common_tcp_socket.cpp in Sources */,
+				875D4C6E1B022CA100B1FF81 /* server_thread.cpp in Sources */,
 				875D4C6B1B01C96800B1FF81 /* common_thread.cpp in Sources */,
 				8777B5731AF54D55008E8481 /* server_main.cpp in Sources */,
 			);
